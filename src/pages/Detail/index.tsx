@@ -1,14 +1,13 @@
 import { FC } from "react";
-import Link from "react-router-dom";
 import * as S from "./styled";
-
-import Search from "components/Search";
+import { useParams } from "react-router-dom";
 
 const Index: FC = () => {
+  const params =useParams()
+  console.log(params.id)
   return (
     <S.Container>
-      <h1>Movies</h1>
-      <Search />
+      <h1>Detail</h1>
     </S.Container>
   );
 };
