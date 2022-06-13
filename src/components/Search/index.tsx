@@ -1,8 +1,8 @@
 import { FC, useState } from "react";
+import { useMovie } from "providers";
+import * as S from "./styled";
 import lupa from "assets/search_icon.svg";
 import camera from "assets/search_icon_movie.svg";
-import * as S from "./styled";
-import { useMovie } from "providers";
 
 const Index: FC = () => {
   const { setMovie }: any = useMovie();

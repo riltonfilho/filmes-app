@@ -6,6 +6,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: 46px;
+  margin: 1rem;
 `;
 export const ContainerSearchLeft = styled.div`
   background-color: #4a4a4a;
