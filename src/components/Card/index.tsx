@@ -7,6 +7,7 @@ import * as Service from "services";
 
 import { SiThemoviedatabase } from "react-icons/si";
 import { AiFillStar } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 interface IFilme {
   backdrop_path: string;
@@ -22,7 +23,7 @@ interface IFilme {
 }
 
 const Index: FC = () => {
-  const IMAGE_BASE = `https://image.tmdb.org/t/p/original/`;
+  const IMAGE_BASE = `https://image.tmdb.org/t/p/w200`;
   const NO_IMAGE_BASE = Service.noPicture();
   const [resp, setResp] = useState<IFilme[]>([]);
   const { movie } = useMovie();
@@ -35,64 +36,61 @@ const Index: FC = () => {
   return (
     <S.Container>
       {resp.map((res) => {
-        const { id, backdrop_path, overview, original_title, release_date } =
-          res;
+        const { id, poster_path, overview, original_title, release_date } = res;
         return (
           <Color
             key={id}
-            src={
-              backdrop_path ? `${IMAGE_BASE}${backdrop_path}` : NO_IMAGE_BASE
-            }
+            src={poster_path ? `${IMAGE_BASE}${poster_path}` : NO_IMAGE_BASE}
             crossOrigin="anonymous"
             format="hex"
           >
             {({ data }) => {
               return (
-                <S.Card color={Service.colorSaturation(`${data}`)}>
-                  <S.CardHeader>
-                    <S.CardImage
-                      gradienteColor={`${data}`}
-                      image={
-                        backdrop_path
-                          ? `${IMAGE_BASE}${backdrop_path}`
-                          : NO_IMAGE_BASE
-                      }
-                    ></S.CardImage>
-                  </S.CardHeader>
+                <S.StyledLink to={`/detail/${id}`}>
+                  <S.Card color={Service.colorSaturation(`${data}`)}>
+                    <S.CardHeader>
+                      <S.CardImage
+                        gradienteColor={`${data}`}
+                        image={
+                          poster_path
+                            ? `${IMAGE_BASE}${poster_path}`
+                            : NO_IMAGE_BASE
+                        }
+                      ></S.CardImage>
+                    </S.CardHeader>
 
-                  <S.CardFooter backgroundColor={`${data}`}>
+                    <S.CardFooter backgroundColor={`${data}`}>
+                      <S.Stamp>
+                        <div>
+                          <h2>
+                            <span>
+                              <AiFillStar />
+                            </span>
+                            {res.vote_average}
+                          </h2>
+                        </div>
 
-                    <S.Stamp>
-                      <div>
-                        <h2>
-                          <span>
-                            <AiFillStar />
-                          </span>
-                          {res.vote_average}
-                        </h2>
-                      </div>
+                        <div>
+                          <h2>
+                            <span>
+                              <SiThemoviedatabase />
+                            </span>
+                            {res.id}
+                          </h2>
+                        </div>
+                      </S.Stamp>
 
-                      <div>
-                        <h2>
-                          <span>
-                            <SiThemoviedatabase />
-                          </span>
-                          {res.id}
-                        </h2>
-                      </div>
-                    </S.Stamp>
+                      <h3>{original_title}</h3>
 
-                    <h3>{original_title}</h3>
+                      <h4>
+                        <code>({Service.dataBR(release_date)}) </code>
+                        {res.title}
+                      </h4>
 
-                    <h4>
-                      <code>({Service.dataBR(release_date)}) </code>
-                      {res.title}
-                    </h4>
-
-                    <p>{overview ? overview : `(...)`}</p>
-
-                  </S.CardFooter>
-                </S.Card>
+                      <p>{overview ? overview : `(...)`}</p>
+                    </S.CardFooter>
+                  </S.Card>
+                </S.StyledLink>
               );
             }}
           </Color>

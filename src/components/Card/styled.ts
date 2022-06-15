@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 interface props {
   image?: string;
   backgroundColor?: string;
@@ -99,5 +100,15 @@ export const Stamp = styled.div<props>`
   h2 {
     font-size: 1rem;
     vertical-align: middle;
+  }
+`;
+export const StyledLink = styled(Link)`
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
   }
 `;

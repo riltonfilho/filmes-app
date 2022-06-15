@@ -16,15 +16,12 @@ const movieFetch = async (endPoint: string) => {
       OPTIONS
     );
     const data = await response.json();
-    console.log(data.results);
-    return data.results;
-     
+    // console.log(data.results);
+    return data.results;     
   } 
   catch (Error) {
       console.log(Error);
   } 
-  finally {
-    //    setIsLoad(false);
-  }
+
 };
 export default movieFetch;
