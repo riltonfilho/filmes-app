@@ -1,4 +1,4 @@
-# Prjeto Filmes-app
+# Projeto Filmes-app
 
 -Desenvolvimento em react com TS
 
